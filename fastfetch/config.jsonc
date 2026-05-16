@@ -1,0 +1,78 @@
+// Load with --config examples/2.jsonc
+// Note that you must replace the image path to an existing image to display it.
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/luffy.webp",
+    "type": "kitty",
+    "height": 9,
+    "color": {
+      "1": "white",
+      "2": "#bb6c72",
+      "3": "blue",
+      "4": "#c7aa83",
+    },
+    "padding": {
+      "top": 1,
+    },
+  },
+  "display": {
+    "separator": " ",
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "Hi there, brandon",
+      "key": "╭─󰌢",
+      "keyColor": "red",
+    },
+    {
+      "type": "os",
+      "key": "├─󰣇", // Just get your distro's logo off nerdfonts.com
+      "keyColor": "red",
+    },
+    {
+      "type": "kernel",
+      "key": "├─",
+      "keyColor": "red",
+    },
+    {
+      "type": "shell",
+      "key": "├─",
+      "keyColor": "red",
+    },
+    {
+      "type": "terminal",
+      "key": "╰─",
+      "keyColor": "red",
+    },
+    "break",
+    {
+      "type": "cpu",
+      "key": "╭─󰻠",
+      "keyColor": "blue",
+      "format": "{name}",
+    },
+    {
+      "type": "gpu",
+      "key": "├─󰍛",
+      "keyColor": "blue",
+      "format": "{name}",
+    },
+    {
+      "type": "disk",
+      "key": "├─",
+      "keyColor": "blue",
+    },
+    {
+      "type": "memory",
+      "key": "╰─󰑭",
+      "keyColor": "blue",
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[3m\u001b[38;2;150;157;176m❝As long as I'm alive, I have infinite chances❞",
+    },
+  ],
+}
