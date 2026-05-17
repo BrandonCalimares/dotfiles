@@ -44,6 +44,7 @@ ShellRoot {
 
                 // Center of the bar
                 Music {
+                    screen: root.modelData
                     anchors.right: clock.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: Theme.barSpacing

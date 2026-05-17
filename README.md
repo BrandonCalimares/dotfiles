@@ -13,3 +13,26 @@ My personal configuration for CachyOS with Hyprland.
 | 📊 Panel/UI Bars      | [Quickshell](https://github.com/quickshell-qi/quickshell) |
 | ℹ️ System Information | [Fastfetch](https://github.com/fastfetch-cli/fastfetch)   |
 | 🖼️ Wallpaper Manager  | [Hyprpaper](https://github.com/hyprwm/hyprpaper)          |
+
+## ⌨️ Key Binds
+
+| Key bind            | Action                                               |
+| ------------------- | ---------------------------------------------------- |
+| `Super + Q`         | Open Kitty                                           |
+| `Super + X`         | Close the focused window                             |
+| `Super + E`         | Open Nemo                                            |
+| `Super + W`         | Toggle floating for the focused window               |
+| `Super + S`         | Open Spotify                                         |
+| `Super + D`         | Open Discord                                         |
+| `Super + B`         | Open Brave                                           |
+| `Super + C`         | Open VS Code                                         |
+| `Super + Shift + S` | Take a region screenshot with `hyprshot`             |
+| `Print`             | Take a region screenshot and save it in `~/Pictures` |
+| `Super + P`         | Pick a color with `hyprpicker`                       |
+| `Super + F`         | Toggle maximized fullscreen                          |
+| `Super + N`         | Open Notion                                          |
+| `Super + V`         | Open the clipboard history picker                    |
+| `Super + J`         | Toggle split layout in dwindle                       |
+| `Super + M`         | Toggle the Quickshell power menu                     |
+| `Super + R`         | Toggle the Quickshell launcher                       |
+| `Super + Z`         | Toggle the Quickshell music menu                     |

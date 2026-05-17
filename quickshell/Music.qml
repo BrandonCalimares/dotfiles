@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import "components/music"
 
 Item {
@@ -7,6 +8,7 @@ Item {
     implicitWidth: Theme.barWidth
     implicitHeight: Theme.barHeight
     property bool focused: mouseArea.containsMouse || (popupLoader.item ? popupLoader.item.expanded : false)
+    required property var screen
 
     Rectangle {
         border.color: Theme.surface1
@@ -71,6 +73,19 @@ Item {
         function onActiveIndexChanged() {
             if (popupLoader.item) {
                 popupLoader.savedActiveIndex = popupLoader.item.activeIndex;
+            }
+        }
+    }
+
+    GlobalShortcut {
+        name: "musicmenu"
+        onPressed: {
+            if (Hyprland.focusedMonitor.name == root.screen.name) {
+                if (popupLoader.item) {
+                    popupLoader.item.expanded = !popupLoader.item.expanded
+                } else {
+                    popupLoader.active = true
+                }
             }
         }
     }

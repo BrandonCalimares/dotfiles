@@ -296,6 +296,7 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 -- Quickshell
 hl.bind(mainMod .. " + M", hl.dsp.global("quickshell:powermenu"))
 hl.bind(mainMod .. " + R", hl.dsp.global("quickshell:launcher"))
+hl.bind(mainMod .. " + Z", hl.dsp.global("quickshell:musicmenu"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
