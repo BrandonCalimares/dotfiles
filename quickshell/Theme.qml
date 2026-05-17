@@ -62,7 +62,7 @@ Singleton {
 
     readonly property font largeFont: Qt.font({
         family: "JetBrainsMono NerdFont",
-        pixelSize: 24,
+        pixelSize: 22,
         weight: Font.Bold
     })
 
@@ -80,7 +80,7 @@ Singleton {
     readonly property int popupPadding: 14
     readonly property int popupSpacing: barSpacing * 3
     readonly property int popupInnerSpacing: barSpacing * 2
-    readonly property int pfpSize: 64
+    readonly property int pfpSize: 84
     readonly property int volumeBarWidth: 160
     readonly property int volumeBarHeight: 6
     readonly property int musicBarWidth: 220

@@ -49,7 +49,9 @@ PanelWindow {
             anchors.centerIn: parent
             spacing: Theme.popupSpacing
 
-            UserInfo {}
+            UserInfo {
+                Layout.fillWidth: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -58,11 +60,13 @@ PanelWindow {
                 UsageStat {
                     statType: "cpu"
                     timer: updateTimer
+                    Layout.fillWidth: true
                 }
 
                 UsageStat {
                     statType: "ram"
                     timer: updateTimer
+                    Layout.fillWidth: true
                 }
 
                 Timer {
@@ -80,24 +84,28 @@ PanelWindow {
                     btnText: "󰐥"
                     process: shutdown
                     btnColor: Theme.red
+                    Layout.fillWidth: true
                 }
 
                 PowerButton {
                     btnText: "󰜉"
                     process: restart
                     btnColor: Theme.yellow
+                    Layout.fillWidth: true
                 }
 
                 PowerButton {
                     btnText: "󰤄"
                     process: sleep
                     btnColor: Theme.mauve
+                    Layout.fillWidth: true
                 }
 
                 PowerButton {
                     btnText: "󰍃"
                     process: logoff
                     btnColor: Theme.blue
+                    Layout.fillWidth: true
                 }
             }
         }

@@ -1,19 +1,18 @@
 import Quickshell.Io
 import QtQuick
-import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import "../.."
 
 Item {
     id: root
-    Layout.fillWidth: true
+    implicitWidth: container.implicitWidth
     implicitHeight: container.implicitHeight
 
     required property string statType
     required property Timer timer
     property string statIcon: statType === "cpu" ? "" : ""
     property Process statProc: statType === "cpu" ? cpuProc : ramProc
-    property color statColor: statType === "cpu" ? Qt.darker(Theme.blue, 2) : Qt.darker(Theme.green, 2)
+    property color statColor: statType === "cpu" ? Qt.darker(Theme.blue, 2.5) : Qt.darker(Theme.green, 2.5)
     property int statUsage: 0
 
     //CPU Usage
@@ -64,6 +63,7 @@ Item {
         }
     }
 
+    // Mask
     Rectangle {
         id: container
         anchors.fill: parent
@@ -74,9 +74,10 @@ Item {
         visible: false
     }
 
+    // Usage Bar
     Rectangle {
         anchors.fill: container
-        color: Theme.surface0
+        color: Qt.alpha(Theme.surface0, 0.5)
         radius: Theme.innerRadius
         border.width: Theme.borderWidth
         border.color: Theme.surface1
