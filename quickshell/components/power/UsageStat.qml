@@ -12,7 +12,7 @@ Item {
     required property Timer timer
     property string statIcon: statType === "cpu" ? "" : ""
     property Process statProc: statType === "cpu" ? cpuProc : ramProc
-    property color statColor: statType === "cpu" ? Qt.darker(Theme.blue, 2.5) : Qt.darker(Theme.green, 2.5)
+    property color statColor: statType === "cpu" ? Qt.alpha(Theme.blue, 0.25) : Qt.alpha(Theme.green, 0.25)
     property int statUsage: 0
 
     //CPU Usage

@@ -5,6 +5,17 @@ import "../.."
 
 Rectangle {
     id: root
+    color: Qt.alpha(Theme.surface0, 0.7)
+    implicitWidth: audioSection.implicitWidth
+    implicitHeight: column.implicitHeight + Theme.popupPadding * 2
+    height: expanded ? implicitHeight : 0
+    border.width: Theme.borderWidth
+    border.color: Theme.surface1
+    radius: Theme.innerRadius
+    clip: true
+
+    x: rootColumn.x + audioSection.x
+    y: rootColumn.y + audioSection.y + audioSection.height + Theme.popupInnerSpacing / 2
 
     required property var audioSection
     required property string type
@@ -22,18 +33,6 @@ Rectangle {
 
     property var audio: audioTracker.node.audio
     property bool expanded: false
-
-    color: Qt.alpha(Theme.surface0, 0.9)
-    implicitWidth: audioSection.implicitWidth
-    implicitHeight: column.implicitHeight + Theme.popupPadding * 2
-    height: expanded ? implicitHeight : 0
-    border.width: Theme.borderWidth
-    border.color: Theme.surface1
-    radius: Theme.innerRadius
-    clip: true
-
-    x: rootColumn.x + audioSection.x
-    y: rootColumn.y + audioSection.y + audioSection.height + Theme.popupInnerSpacing / 2
 
     Behavior on height {
         NumberAnimation {
@@ -60,7 +59,7 @@ Rectangle {
                 Text {
                     id: text
                     text: modelData.nickname
-                    color: modelData.id == audioTracker.node.id ? Theme.base: Theme.text
+                    color: modelData.id == audioTracker.node.id ? Theme.base : Theme.text
                     font: Theme.barFont
                     anchors.centerIn: parent
                     width: parent.implicitWidth - Theme.popupPadding * 2

@@ -81,7 +81,7 @@ Singleton {
     readonly property int popupSpacing: barSpacing * 3
     readonly property int popupInnerSpacing: barSpacing * 2
     readonly property int pfpSize: 84
-    readonly property int volumeBarWidth: 160
+    readonly property int volumeBarWidth: 180
     readonly property int volumeBarHeight: 6
     readonly property int musicBarWidth: 220
     readonly property int musicBarHeight: volumeBarHeight
