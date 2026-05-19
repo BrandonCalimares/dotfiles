@@ -52,6 +52,7 @@ PanelWindow {
             spacing: Theme.popupInnerSpacing
             anchors.centerIn: parent
 
+            // Player Switcher
             RowLayout {
                 spacing: Theme.popupInnerSpacing / 2
                 visible: activePlayer != null
@@ -77,6 +78,7 @@ PanelWindow {
                 Layout.fillWidth: true
             }
 
+            // Progress Bar
             RowLayout {
                 id: row
                 spacing: Theme.popupInnerSpacing

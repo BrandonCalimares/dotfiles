@@ -74,11 +74,11 @@ PanelWindow {
                     target: weather
                     function onTempChanged() {
                         if (weather.temp !== null) {
-                            popup.temp = weather.temp
+                            popup.temp = weather.temp;
                         }
                     }
                     function onWeatherCodeChanged() {
-                        popup.weatherCode = weather.weatherCode
+                        popup.weatherCode = weather.weatherCode;
                     }
                 }
 
