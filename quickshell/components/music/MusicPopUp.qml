@@ -59,7 +59,7 @@ PanelWindow {
 
                 Text {
                     text: activePlayer.identity + " "
-                    font: Theme.smallFont
+                    font: Theme.sFont
                     color: switchArea.containsMouse ? Theme.green : Theme.subtext0
                 }
 

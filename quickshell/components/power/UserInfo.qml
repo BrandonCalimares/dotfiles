@@ -31,7 +31,7 @@ RowLayout {
         // Username
         Text {
             text: Quickshell.env("USER")
-            font: Theme.largeFont
+            font: Theme.xlFont
             color: Theme.text
         }
 
@@ -46,14 +46,14 @@ RowLayout {
 
         Text {
             text: "󰣇 " + userInfo.distroName
-            font: Theme.smallFont
+            font: Theme.sFont
             color: Theme.blue
         }
 
         // Window Manager
         Text {
             text: "󱂬 " + Quickshell.env("XDG_CURRENT_DESKTOP")
-            font: Theme.smallFont
+            font: Theme.sFont
             color: Theme.subtext0
         }
     }

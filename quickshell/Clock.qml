@@ -8,6 +8,8 @@ Item {
     implicitHeight: Theme.barHeight
 
     property bool focused: mouseArea.containsMouse || (popupLoader.item ? popupLoader.item.expanded : false)
+    property var temp: null
+    property int weatherCode: 0
 
     SystemClock {
         id: sysClock
@@ -53,7 +55,7 @@ Item {
                 text: Qt.formatDateTime(sysClock.date, "MMM d")
                 anchors.verticalCenter: parent.verticalCenter
                 color: root.focused ? Theme.surface0 : Theme.subtext0
-                font: Theme.smallFont
+                font: Theme.sFont
 
                 Behavior on color {
                     ColorAnimation {
@@ -77,7 +79,10 @@ Item {
         id: popupLoader
         active: false
         focus: true
-        sourceComponent: ClockPopUp {}
+        sourceComponent: ClockPopUp {
+            temp: root.temp
+            weatherCode: root.weatherCode
+        }
         onLoaded: popupLoader.item.expanded = true
     }
 
@@ -86,6 +91,18 @@ Item {
         function onOpenedChanged() {
             if (popupLoader.item && !popupLoader.item.opened) {
                 popupLoader.active = false;
+            }
+        }
+
+        function onTempChanged() {
+            if (popupLoader.item) {
+                root.temp = popupLoader.item.temp
+            }
+        }
+
+        function onWeatherCodeChanged() {
+            if (popupLoader.item) {
+                root.weatherCode = popupLoader.item.weatherCode
             }
         }
     }

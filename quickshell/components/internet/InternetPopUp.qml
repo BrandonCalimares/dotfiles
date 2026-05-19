@@ -64,13 +64,13 @@ PanelWindow {
                     spacing: Theme.popupInnerSpacing
                     Text {
                         text: popup.state === "up" ? "󰍹" : "󰶐"
-                        font: Theme.bigFont
+                        font: Theme.lFont
                         color: popup.state === "up" ? Theme.mauve : Theme.red
                     }
     
                     Text {
                         text: popup.state === "up" ? "Connected" : "No Internet"
-                        font: Theme.bigFont
+                        font: Theme.lFont
                         color: Theme.text
                     }
                 }
@@ -79,7 +79,7 @@ PanelWindow {
                     visible: popup.state === "up"
                     text: ipProc.ip
                     color: Theme.subtext0
-                    font: Theme.smallFont
+                    font: Theme.sFont
                 }
 
                 Process {

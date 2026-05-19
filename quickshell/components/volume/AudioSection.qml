@@ -47,7 +47,7 @@ ColumnLayout {
         Text {
             id: maxText
             text: "100"
-            font: Theme.bigFont
+            font: Theme.lFont
             visible: false
         }
 
@@ -59,7 +59,7 @@ ColumnLayout {
             Text {
                 text: root.audioIcon
                 color: Theme.text
-                font: Theme.bigFont
+                font: Theme.lFont
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
@@ -118,7 +118,7 @@ ColumnLayout {
             Text {
                 text: Math.trunc(root.audio.volume * 100)
                 color: Theme.text
-                font: Theme.bigFont
+                font: Theme.lFont
                 anchors.centerIn: parent
             }
         }
@@ -162,7 +162,7 @@ ColumnLayout {
                 Text {
                     id: dropdownIcon
                     text: !root.audioList.expanded ? "" : ""
-                    font: Theme.bigFont
+                    font: Theme.lFont
                     color: Theme.text
                     anchors.centerIn: parent
                 }

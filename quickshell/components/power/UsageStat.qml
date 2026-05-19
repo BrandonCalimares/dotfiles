@@ -99,7 +99,7 @@ Item {
         Text {
             id: statText
             text: root.statIcon + "  " + root.statUsage + "%"
-            font: Theme.bigFont
+            font: Theme.lFont
             color: Theme.text
             anchors.centerIn: parent
         }

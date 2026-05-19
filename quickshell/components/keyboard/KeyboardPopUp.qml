@@ -123,7 +123,7 @@ PanelWindow {
 
                             Text {
                                 text: layoutName.inParens
-                                font: Theme.smallFont
+                                font: Theme.sFont
                                 color: index === popup.active ? Theme.surface1 : Theme.subtext0
                                 visible: layoutName.inParens.length > 0
 

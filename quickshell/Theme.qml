@@ -37,32 +37,40 @@ Singleton {
     readonly property color background: Qt.alpha(mantle, 0.8)
 
     // Fonts
-    readonly property font smallFont: Qt.font({
-        family: "JetBrainsMono NerdFont",
+    readonly property var family: "JetBrainsMono NerdFont"
+
+    readonly property font sFont: Qt.font({
+        family: family,
         pixelSize: 12
     })
 
-    readonly property font mediumFont: Qt.font({
-        family: "JetBrainsMono NerdFont",
+    readonly property font mFont: Qt.font({
+        family: family,
         pixelSize: 13,
         weight: Font.Bold
     })
 
     readonly property font barFont: Qt.font({
-        family: "JetBrainsMono NerdFont",
+        family: family,
         pixelSize: 14,
         weight: Font.Bold
     })
 
-    readonly property font bigFont: Qt.font({
-        family: "JetBrainsMono NerdFont",
+    readonly property font lFont: Qt.font({
+        family: family,
         pixelSize: 16,
         weight: Font.Bold
     })
 
-    readonly property font largeFont: Qt.font({
-        family: "JetBrainsMono NerdFont",
+    readonly property font xlFont: Qt.font({
+        family: family,
         pixelSize: 22,
+        weight: Font.Bold
+    })
+
+    readonly property font xxlFont: Qt.font({
+        family: family,
+        pixelSize: 42,
         weight: Font.Bold
     })
 

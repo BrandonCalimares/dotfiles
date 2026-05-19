@@ -68,7 +68,7 @@ PanelWindow {
 
                 Text {
                     text: "text"
-                    font: Theme.mediumFont
+                    font: Theme.mFont
                 }
             }
         }
@@ -94,7 +94,7 @@ PanelWindow {
                     color: Theme.text
                     leftPadding: Theme.popupPadding * 2 + inputIcon.width
                     padding: Theme.popupPadding
-                    font: Theme.mediumFont
+                    font: Theme.mFont
 
                     background: Rectangle {
                         color: Theme.surface0
@@ -127,7 +127,7 @@ PanelWindow {
                     anchors.leftMargin: Theme.popupPadding
                     anchors.verticalCenter: parent.verticalCenter
                     text: ""
-                    font: Theme.bigFont
+                    font: Theme.lFont
                     color: Theme.sapphire
                 }
             }
@@ -204,7 +204,7 @@ PanelWindow {
 
                             Text {
                                 text: modelData.name
-                                font: Theme.mediumFont
+                                font: Theme.mFont
                                 color: Theme.text
                                 elide: Text.ElideRight
                                 Layout.fillWidth: true
@@ -212,7 +212,7 @@ PanelWindow {
 
                             Text {
                                 text: ""
-                                font.family: Theme.smallFont.family
+                                font.family: Theme.sFont.family
                                 font.pixelSize: 13
                                 font.weight: Font.Bold
                                 color: Theme.overlay2

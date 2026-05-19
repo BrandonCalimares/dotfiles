@@ -15,7 +15,7 @@ Rectangle {
         id: dayText
         text: day
         anchors.centerIn: parent
-        font: Theme.mediumFont
+        font: Theme.mFont
         color: dayName ? Theme.text : (today ? Theme.base : Theme.subtext0)
     }
 }

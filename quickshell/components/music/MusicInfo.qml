@@ -50,7 +50,7 @@ Rectangle {
 
                 Text {
                     text: activePlayer ? activePlayer.trackTitle || "Unknown Title" : "No media detected"
-                    font: Theme.bigFont
+                    font: Theme.lFont
                     color: Theme.text
                     elide: Text.ElideRight
                     Layout.fillWidth: true
@@ -67,7 +67,7 @@ Rectangle {
 
                 Text {
                     text: activePlayer ? activePlayer.trackArtist || "" : " "
-                    font: Theme.smallFont
+                    font: Theme.sFont
                     color: Theme.subtext0
                     elide: Text.ElideRight
                     Layout.fillWidth: true

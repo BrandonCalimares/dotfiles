@@ -23,7 +23,7 @@ RowLayout {
 
     Text {
         text: ""
-        font: Theme.bigFont
+        font: Theme.lFont
         color: activePlayer && activePlayer.canGoPrevious ? (prevArea.containsMouse ? Theme.green : Theme.text) : Theme.overlay0
 
         MouseArea {
@@ -38,7 +38,7 @@ RowLayout {
 
     Text {
         text: activePlayer && activePlayer.isPlaying ? "" : ""
-        font: Theme.largeFont
+        font: Theme.xlFont
         color: activePlayer && activePlayer.canPlay && activePlayer.canPause ? (playArea.containsMouse ? Theme.green : Theme.text) : Theme.overlay0
 
         MouseArea {
@@ -53,7 +53,7 @@ RowLayout {
 
     Text {
         text: ""
-        font: Theme.bigFont
+        font: Theme.lFont
         color: activePlayer && activePlayer.canGoNext ? (nextArea.containsMouse ? Theme.green : Theme.text) : Theme.overlay0
 
         MouseArea {

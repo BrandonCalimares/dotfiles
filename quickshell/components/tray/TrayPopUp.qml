@@ -102,7 +102,7 @@ PanelWindow {
                                 visible: !modelData.isSeparator
                                 text: modelData.text
                                 color: modelData.enabled ? (mouseArea.containsMouse ? "white" : Theme.text) : Theme.subtext0
-                                font: Theme.smallFont
+                                font: Theme.sFont
 
                                 Behavior on color {
                                     ColorAnimation {
@@ -120,7 +120,7 @@ PanelWindow {
                                 visible: modelData.hasChildren
                                 text: ""
                                 color: modelData.enabled ? (mouseArea.containsMouse ? "white" : Theme.text) : Theme.subtext0
-                                font: Theme.smallFont
+                                font: Theme.sFont
                                 Behavior on color {
                                     ColorAnimation {
                                         duration: Theme.colorDuration
@@ -179,7 +179,7 @@ PanelWindow {
                         anchors.centerIn: parent
                         text: " Back"
                         color: backArea.containsMouse ? Theme.surface0 : Theme.text
-                        font: Theme.mediumFont
+                        font: Theme.mFont
 
                         Behavior on color {
                             ColorAnimation {

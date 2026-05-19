@@ -25,7 +25,7 @@ Rectangle {
         id: text
         text: root.btnText
         color: mouseArea.containsMouse ? Theme.base : btnColor
-        font: Theme.largeFont
+        font: Theme.xlFont
         anchors.centerIn: parent
 
         Behavior on color {
