@@ -9,9 +9,9 @@ PanelWindow {
     id: popup
     property bool expanded: false
     property bool opened: expanded || content.height > 0
-
     required property var layouts
     required property int active
+    property var selectedColor: Qt.alpha(Theme.lavender, 0.85)
 
     visible: opened
 
@@ -55,7 +55,7 @@ PanelWindow {
             Repeater {
                 model: popup.layouts
                 Rectangle {
-                    color: index === popup.active ? Theme.lavender : Theme.surface0
+                    color: index === popup.active ? popup.selectedColor : Theme.surface0
                     Layout.fillWidth: true
                     implicitHeight: row.implicitHeight + Theme.popupPadding * 2
                     implicitWidth: row.implicitWidth + Theme.popupPadding * 2
@@ -79,7 +79,7 @@ PanelWindow {
                         Rectangle {
                             implicitHeight: kbText.implicitHeight + Theme.popupPadding * 2
                             implicitWidth: implicitHeight
-                            color: index === popup.active ? Qt.darker(Theme.lavender, 1.2) : Theme.surface1
+                            color: index === popup.active ? Theme.lavender : Theme.surface1
                             radius: Theme.innerRadius
 
                             Text {
