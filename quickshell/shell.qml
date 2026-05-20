@@ -4,6 +4,8 @@ import QtQuick
 import QtQuick.Layouts
 
 ShellRoot {
+    Notifications {}
+
     Variants {
         model: Quickshell.screens
 
