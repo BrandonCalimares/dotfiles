@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Widgets
 import Quickshell.Io
+import QtQuick.Controls
 import Quickshell.Services.Notifications
 
 PanelWindow {
@@ -31,16 +33,31 @@ PanelWindow {
         onNotification: function (notification) {
             notification.tracked = true;
             soundProcess.running = true;
+            if (notification.body == "" && notification.summary == "") {
+                notification.expire();
+                return;
+            }
+
             root.notification = notification;
 
             root.timeout = notification.expireTimeout;
             progressAnim.restart();
 
             root.expanded = true;
+
+            notification.closed.connect(function () {
+                root.expanded = false;
+            });
         }
     }
 
     property var notification: null
+
+    HyprlandFocusGrab {
+        id: grab
+        windows: [root]
+        active: root.mouseInPopup
+    }
 
     Process {
         id: soundProcess
@@ -48,6 +65,9 @@ PanelWindow {
     }
 
     property var timeout: 5000
+
+    property bool mouseInPopup: mouseArea.containsMouse || closeArea.containsMouse || (input.visible && input.hovered)
+    onMouseInPopupChanged: mouseInPopup ? progressAnim.pause() : progressAnim.resume()
 
     Rectangle {
         id: content
@@ -65,124 +85,147 @@ PanelWindow {
             }
         }
 
-        Rectangle {
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            propagateComposedEvents: true
+            hoverEnabled: true
+        }
+
+        ColumnLayout {
             id: container
-            implicitWidth: col.implicitWidth + Theme.popupPadding * 2
-            implicitHeight: col.implicitHeight + Theme.popupPadding * 2
-            radius: Theme.innerRadius
-            color: Theme.surface0
+            spacing: Theme.popupInnerSpacing
             anchors.centerIn: parent
-            border.width: Theme.borderWidth
-            border.color: Theme.surface1
 
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: progressAnim.pause()
-                onExited: progressAnim.resume()
-            }
-
-            // Progress Bar
-            Rectangle {
-                id: progressBar
-                height: parent.height
-                anchors.left: parent.left
-                color: Theme.surface1
-                radius: Theme.innerRadius
-
-                NumberAnimation on width {
-                    id: progressAnim
-                    from: 0
-                    to: container.width
-                    duration: root.timeout
-                    easing.type: Easing.Linear
-                    running: false
-
-                    onFinished: {
-                        root.notification.expire();
-                        root.expanded = false;
-                    }
-                }
-            }
-
-            ColumnLayout {
-                id: col
-                anchors.centerIn: parent
+            // Header
+            RowLayout {
+                Layout.fillWidth: true
                 spacing: Theme.popupInnerSpacing
 
-                // Header
-                RowLayout {
-                    spacing: Theme.popupInnerSpacing
+                Text {
+                    text: ""
+                    font: Theme.sFont
+                    color: Theme.accent
+                }
 
-                    Text {
-                        text: ""
-                        font: Theme.sFont
-                        color: Theme.subtext1
+                Text {
+                    text: notification != null ? notification.appName : ""
+                    font: Theme.sFont
+                    color: Theme.accent
+                }
+
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                Text {
+                    text: ""
+                    font: Theme.barFont
+                    color: closeArea.containsMouse ? Theme.red : Theme.subtext0
+
+                    MouseArea {
+                        id: closeArea
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.notification.dismiss()
+                        hoverEnabled: true
                     }
+                }
+            }
 
-                    Text {
-                        text: notification != null ? notification.appName : ""
-                        font: Theme.sFont
-                        color: Theme.subtext1
-                    }
+            Rectangle {
+                implicitWidth: col.implicitWidth + Theme.popupPadding * 2
+                implicitHeight: col.implicitHeight + Theme.popupPadding * 2
+                radius: Theme.innerRadius
+                color: Theme.surface0
+                border.width: Theme.borderWidth
+                border.color: Theme.surface1
 
-                    Item {
-                        Layout.fillWidth: true
-                    }
+                // Progress Bar
+                Rectangle {
+                    id: progressBar
+                    height: parent.height
+                    anchors.left: parent.left
+                    color: Theme.surface1
+                    radius: Theme.innerRadius
 
-                    Text {
-                        text: ""
-                        font: Theme.barFont
-                        color: closeArea.containsMouse ? Theme.red : Theme.subtext0
+                    NumberAnimation on width {
+                        id: progressAnim
+                        from: 0
+                        to: container.width
+                        duration: root.timeout
+                        easing.type: Easing.Linear
+                        running: false
 
-                        MouseArea {
-                            id: closeArea
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                root.notification.dismiss();
-                                root.expanded = false;
-                            }
-                            hoverEnabled: true
-                        }
+                        onFinished: root.notification.expire()
                     }
                 }
 
-                // Body
-                RowLayout {
-                    spacing: Theme.popupSpacing
-                    Layout.preferredWidth: 340
-                    Layout.maximumHeight: 140
+                ColumnLayout {
+                    id: col
+                    anchors.centerIn: parent
+                    spacing: Theme.popupInnerSpacing
 
-                    IconImage {
-                        source: notification != null ? notification.image : ""
-                        visible: source != ""
-                        implicitSize: 42
-                    }
+                    // Body
+                    RowLayout {
+                        spacing: Theme.popupSpacing
+                        Layout.preferredWidth: 340
+                        Layout.maximumHeight: 100
 
-                    ColumnLayout {
-                        spacing: Theme.popupInnerSpacing / 2
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        Text {
-                            text: notification != null ? notification.summary : ""
-                            font: Theme.barFont
-                            color: Theme.text
-                            wrapMode: Text.WordWrap
-                            elide: Text.ElideRight
-                            Layout.fillWidth: true
+                        IconImage {
+                            source: notification != null ? notification.image : ""
+                            visible: source != ""
+                            implicitSize: 52
                         }
 
-                        Text {
-                            text: notification != null ? notification.body : ""
-                            font: Theme.mFont
-                            color: Theme.subtext0
-                            wrapMode: Text.WordWrap
-                            elide: Text.ElideRight
+                        ColumnLayout {
+                            spacing: Theme.popupInnerSpacing / 2
                             Layout.fillWidth: true
                             Layout.fillHeight: true
+
+                            Text {
+                                text: notification != null ? notification.summary : ""
+                                font: Theme.barFont
+                                color: Theme.text
+                                wrapMode: Text.WordWrap
+                                elide: Text.ElideRight
+                                Layout.fillWidth: true
+                            }
+
+                            Text {
+                                text: notification != null ? notification.body : ""
+                                font: Theme.mFont
+                                color: Theme.subtext0
+                                wrapMode: Text.WordWrap
+                                elide: Text.ElideRight
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                            }
+                        }
+                    }
+
+                    TextField {
+                        id: input
+                        visible: notification.hasInlineReply
+                        placeholderText: notification.inlineReplyPlaceholder || "Type your reply..."
+                        placeholderTextColor: Theme.overlay1
+                        focus: true
+                        Layout.fillWidth: true
+                        activeFocusOnPress: true
+                        color: Theme.text
+                        padding: Theme.popupPadding
+                        font: Theme.mFont
+
+                        background: Rectangle {
+                            color: Theme.base
+                            border.color: Theme.surface0
+                            border.width: Theme.borderWidth
+                            radius: Theme.innerRadius
+                        }
+
+                        onAccepted: {
+                            notification.sendInlineReply(input.text);
+                            input.text = "";
                         }
                     }
                 }
