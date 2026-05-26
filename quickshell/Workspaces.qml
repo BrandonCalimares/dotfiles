@@ -11,7 +11,7 @@ Row {
         Rectangle {
             property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
             property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-            width: isActive ? 32 : (ws || index < 2 ? Theme.barHeight - 5 : 0)
+            width: isActive ? 32 : (ws ? Theme.barHeight - 5 : 0)
             height: Theme.barHeight - 6
             radius: 8
 
@@ -24,8 +24,7 @@ Row {
 
             Text {
                 anchors.centerIn: parent
-                
-                text: ws || index < 2 ? ws.name : ""
+                text: ws ? index + 1 : ""
                 color: Theme.base
                 font: Theme.barFont
             }

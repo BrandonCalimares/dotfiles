@@ -59,14 +59,15 @@ PanelWindow {
                 Layout.leftMargin: 2
 
                 Text {
-                    text: activePlayer.identity + " "
+                    text: activePlayer ? activePlayer.identity + " " : ""
                     font: Theme.sFont
                     color: switchArea.containsMouse ? Theme.green : Theme.subtext0
                 }
 
                 MouseArea {
                     id: switchArea
-                    anchors.fill: parent
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     cursorShape: Qt.PointingHandCursor
                     onClicked: activeIndex = (activeIndex + 1) % playerList.length
                     hoverEnabled: true
@@ -114,14 +115,14 @@ PanelWindow {
                     }
 
                     FrameAnimation {
-                        running: activePlayer.playbackState == MprisPlaybackState.Playing && !parent.dragging
+                        running:  activePlayer ? activePlayer.playbackState == MprisPlaybackState.Playing && !parent.dragging : false
                         onTriggered: activePlayer.positionChanged()
                     }
 
                     Rectangle {
-                        property real displayPosition: parent.dragging ? parent.dragPosition : activePlayer.position
+                        property real displayPosition: parent.dragging ? parent.dragPosition : activePlayer ? activePlayer.position : 0
 
-                        implicitWidth: parent.implicitWidth * displayPosition / activePlayer.length
+                        implicitWidth: parent.implicitWidth * displayPosition / (activePlayer ? activePlayer.length : 1)
                         implicitHeight: Theme.musicBarHeight
                         color: Theme.green
                         anchors.verticalCenter: parent.verticalCenter
@@ -141,7 +142,7 @@ PanelWindow {
 
                 Text {
                     visible: activePlayer != null
-                    text: "-" + Math.floor((activePlayer.length - activePlayer.position) / 60) + ":" + Math.floor((activePlayer.length - activePlayer.position) % 60).toString().padStart(2, "0")
+                    text: activePlayer ? "-" + Math.floor((activePlayer.length - activePlayer.position) / 60) + ":" + Math.floor((activePlayer.length - activePlayer.position) % 60).toString().padStart(2, "0") : ""
                     color: Theme.text
                     font: Theme.barFont
                 }

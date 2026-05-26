@@ -45,7 +45,7 @@ Rectangle {
 
             ColumnLayout {
                 spacing: Theme.popupInnerSpacing / 2
-                Layout.preferredWidth: row.width
+                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
 
                 Text {

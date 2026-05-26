@@ -5,7 +5,7 @@ import "components/volume"
 
 Item {
     id: root
-    implicitWidth: audioTracker.node.audio.muted ? Theme.barWidth : maxSizeRow.implicitWidth + Theme.barPadding * 2
+    implicitWidth: root.audio && root.audio.muted ? Theme.barWidth : maxSizeRow.implicitWidth + Theme.barPadding * 2
     implicitHeight: Theme.barHeight
     property bool focused: mouseArea.containsMouse || (popupLoader.item ? popupLoader.item.expanded : false)
     
@@ -27,7 +27,7 @@ Item {
         objects: [audioTracker.node]
     }
 
-    property var audio: audioTracker.node.audio
+    property var audio: audioTracker.node ? audioTracker.node.audio : null
 
     Rectangle {
         anchors.fill: parent
@@ -65,11 +65,11 @@ Item {
 
             Text {
                 text: {
-                    if (root.audio.muted)
+                    if (root.audio && root.audio.muted)
                         return "";
-                    if (root.audio.volume < 0.33)
+                    if (root.audio && root.audio.volume < 0.33)
                         return "";
-                    if (root.audio.volume < 0.66)
+                    if (root.audio && root.audio.volume < 0.66)
                         return "";
                     return "";
                 }
@@ -87,14 +87,16 @@ Item {
 
             Text {
                 text: {
-                    if (root.audio.muted)
+                    if (root.audio && root.audio.muted)
                         return "";
-                    return Math.trunc(root.audio.volume * 100) + "%";
+                    if (root.audio)
+                        return Math.trunc(root.audio.volume * 100) + "%";
+                    return "";
                 }
 
                 color: root.focused ? Theme.base : Theme.blue
                 font: Theme.barFont
-                visible: !root.audio.muted
+                visible: root.audio ? !root.audio.muted : false
 
                 Behavior on color {
                     ColorAnimation {

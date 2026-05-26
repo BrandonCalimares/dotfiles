@@ -33,25 +33,28 @@ PanelWindow {
         onNotification: function (notification) {
             notification.tracked = true;
             soundProcess.running = true;
+
             if (notification.body == "" && notification.summary == "") {
                 notification.expire();
                 return;
             }
 
             root.notification = notification;
-
+            root.defaultAction = notification.actions.find(action => action.identifier === "default") ?? null;
             root.timeout = notification.expireTimeout;
             progressAnim.restart();
 
             root.expanded = true;
 
             notification.closed.connect(function () {
+                input.text = "";
                 root.expanded = false;
             });
         }
     }
 
     property var notification: null
+    property var defaultAction: null
 
     HyprlandFocusGrab {
         id: grab
@@ -90,6 +93,11 @@ PanelWindow {
             anchors.fill: parent
             propagateComposedEvents: true
             hoverEnabled: true
+            onClicked: {
+                if (root.defaultAction) {
+                    root.defaultAction.invoke();
+                }
+            }
         }
 
         ColumnLayout {
@@ -109,7 +117,7 @@ PanelWindow {
                 }
 
                 Text {
-                    text: notification != null ? notification.appName : ""
+                    text: root.notification != null ? root.notification.appName : ""
                     font: Theme.sFont
                     color: Theme.accent
                 }
@@ -156,7 +164,6 @@ PanelWindow {
                         duration: root.timeout
                         easing.type: Easing.Linear
                         running: false
-
                         onFinished: root.notification.expire()
                     }
                 }
@@ -173,7 +180,7 @@ PanelWindow {
                         Layout.maximumHeight: 100
 
                         IconImage {
-                            source: notification != null ? notification.image : ""
+                            source: root.notification != null ? root.notification.image : ""
                             visible: source != ""
                             implicitSize: 52
                         }
@@ -184,7 +191,7 @@ PanelWindow {
                             Layout.fillHeight: true
 
                             Text {
-                                text: notification != null ? notification.summary : ""
+                                text: root.notification != null ? root.notification.summary : ""
                                 font: Theme.barFont
                                 color: Theme.text
                                 wrapMode: Text.WordWrap
@@ -193,7 +200,7 @@ PanelWindow {
                             }
 
                             Text {
-                                text: notification != null ? notification.body : ""
+                                text: root.notification != null ? root.notification.body : ""
                                 font: Theme.mFont
                                 color: Theme.subtext0
                                 wrapMode: Text.WordWrap
@@ -206,8 +213,8 @@ PanelWindow {
 
                     TextField {
                         id: input
-                        visible: notification.hasInlineReply
-                        placeholderText: notification.inlineReplyPlaceholder || "Type your reply..."
+                        visible: root.notification && root.notification.hasInlineReply
+                        placeholderText: root.notification && root.notification.inlineReplyPlaceholder || "Type your reply..."
                         placeholderTextColor: Theme.overlay1
                         focus: true
                         Layout.fillWidth: true
@@ -224,7 +231,7 @@ PanelWindow {
                         }
 
                         onAccepted: {
-                            notification.sendInlineReply(input.text);
+                            root.notification.sendInlineReply(input.text);
                             input.text = "";
                         }
                     }
