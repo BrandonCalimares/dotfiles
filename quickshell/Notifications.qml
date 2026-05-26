@@ -6,6 +6,7 @@ import Quickshell.Widgets
 import Quickshell.Io
 import QtQuick.Controls
 import Quickshell.Services.Notifications
+import "themes"
 
 PanelWindow {
     id: root
