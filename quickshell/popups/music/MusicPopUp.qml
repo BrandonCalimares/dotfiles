@@ -53,21 +53,16 @@ PanelWindow {
             anchors.centerIn: parent
 
             // Player Switcher
-            RowLayout {
-                spacing: Theme.popupInnerSpacing / 2
+            Text {
                 visible: activePlayer != null
                 Layout.leftMargin: 2
-
-                Text {
-                    text: activePlayer ? activePlayer.identity + " " : ""
-                    font: Theme.sFont
-                    color: switchArea.containsMouse ? Theme.green : Theme.subtext0
-                }
+                text: activePlayer ? activePlayer.identity + " " : ""
+                font: Theme.sFont
+                color: switchArea.containsMouse ? Theme.green : Theme.subtext0
 
                 MouseArea {
                     id: switchArea
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     onClicked: activeIndex = (activeIndex + 1) % playerList.length
                     hoverEnabled: true
@@ -115,7 +110,7 @@ PanelWindow {
                     }
 
                     FrameAnimation {
-                        running:  activePlayer ? activePlayer.playbackState == MprisPlaybackState.Playing && !parent.dragging : false
+                        running: activePlayer ? activePlayer.playbackState == MprisPlaybackState.Playing && !parent.dragging : false
                         onTriggered: activePlayer.positionChanged()
                     }
 

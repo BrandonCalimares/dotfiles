@@ -1,5 +1,4 @@
 import QtQuick
-import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Hyprland
 import QtQuick.Layouts
@@ -12,7 +11,7 @@ Item {
     implicitHeight: Theme.barHeight
     property bool focused: mouseArea.containsMouse || (popupLoader.item ? popupLoader.item.expanded : false)
     required property var screen
-    
+
     Behavior on implicitWidth {
         NumberAnimation {
             duration: Theme.widthDuration
@@ -132,7 +131,7 @@ Item {
         target: popupLoader.item
         function onOpenedChanged() {
             if (popupLoader.item && !popupLoader.item.opened) {
-                popupLoader.active = false
+                popupLoader.active = false;
             }
         }
     }
@@ -143,13 +142,13 @@ Item {
 
         function onVolumeChanged() {
             if (!popupLoader.active && Hyprland.focusedMonitor.name == root.screen.name) {
-                osdLoader.active = true
+                osdLoader.active = true;
             }
         }
 
         function onMutedChanged() {
             if (!popupLoader.active && Hyprland.focusedMonitor.name == root.screen.name) {
-                osdLoader.active = true
+                osdLoader.active = true;
             }
         }
     }
@@ -169,7 +168,7 @@ Item {
         target: osdLoader.item
         function onOpenedChanged() {
             if (osdLoader.item && !osdLoader.item.opened) {
-                osdLoader.active = false
+                osdLoader.active = false;
             }
         }
     }

@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Services.Pipewire
 import QtQuick.Layouts
 import "../../themes"
 
