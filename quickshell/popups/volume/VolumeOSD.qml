@@ -83,7 +83,7 @@ PanelWindow {
             }
 
             Rectangle {
-                Layout.fillWidth: true
+                implicitWidth: Theme.barFont.pixelSize
                 implicitHeight: Theme.volumeBarWidth
                 Layout.alignment: Qt.AlignHCenter
                 color: Theme.surface1

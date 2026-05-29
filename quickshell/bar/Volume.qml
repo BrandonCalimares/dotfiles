@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Hyprland
 import QtQuick.Layouts
@@ -158,6 +159,7 @@ Item {
         active: false
         focus: true
         sourceComponent: VolumeOSD {
+            screen: root.screen
             audio: root.audio
         }
         onLoaded: osdLoader.item.expanded = true
