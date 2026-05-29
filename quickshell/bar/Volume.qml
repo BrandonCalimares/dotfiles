@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell.Services.Pipewire
+import Quickshell.Hyprland
 import QtQuick.Layouts
 import "../themes"
 import "../popups/volume"
@@ -9,6 +10,7 @@ Item {
     implicitWidth: root.audio && root.audio.muted ? Theme.barWidth : maxSizeRow.implicitWidth + Theme.barPadding * 2
     implicitHeight: Theme.barHeight
     property bool focused: mouseArea.containsMouse || (popupLoader.item ? popupLoader.item.expanded : false)
+    required property var screen
     
     Behavior on implicitWidth {
         NumberAnimation {
@@ -117,7 +119,6 @@ Item {
         }
     }
 
-
     Loader {
         id: popupLoader
         active: false
@@ -131,6 +132,42 @@ Item {
         function onOpenedChanged() {
             if (popupLoader.item && !popupLoader.item.opened) {
                 popupLoader.active = false
+            }
+        }
+    }
+
+    Connections {
+        target: root.audio
+        enabled: root.audio != null
+
+        function onVolumeChanged() {
+            if (!popupLoader.active && Hyprland.focusedMonitor.name == root.screen.name) {
+                osdLoader.active = true
+            }
+        }
+
+        function onMutedChanged() {
+            if (!popupLoader.active && Hyprland.focusedMonitor.name == root.screen.name) {
+                osdLoader.active = true
+            }
+        }
+    }
+
+    Loader {
+        id: osdLoader
+        active: false
+        focus: true
+        sourceComponent: VolumeOSD {
+            audio: root.audio
+        }
+        onLoaded: osdLoader.item.expanded = true
+    }
+
+    Connections {
+        target: osdLoader.item
+        function onOpenedChanged() {
+            if (osdLoader.item && !osdLoader.item.opened) {
+                osdLoader.active = false
             }
         }
     }

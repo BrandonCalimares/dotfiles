@@ -4,9 +4,11 @@ import QtQuick
 import QtQuick.Layouts
 import "themes"
 import "bar"
+import "popups/volume"
 
 ShellRoot {
     Notifications {}
+    /* VolumeOSD {} */
 
     Variants {
         model: Quickshell.screens
@@ -69,7 +71,7 @@ ShellRoot {
                     Tray {}
                     Keyboard {}
                     Internet {}
-                    Volume {}
+                    Volume { screen: root.modelData }
                     Power {
                         screen: root.modelData
                     }

@@ -99,12 +99,12 @@ ColumnLayout {
                 radius: implicitHeight / 2
 
                 Rectangle {
-                    implicitWidth: 14
-                    implicitHeight: 14
+                    implicitWidth: Theme.volumeBarHeight * 2
+                    implicitHeight: Theme.volumeBarHeight * 2
                     color: Theme.text
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
-                    anchors.leftMargin: parent.width - 10
+                    anchors.leftMargin: parent.width - Theme.volumeBarHeight
                     radius: implicitHeight / 2
                 }
             }

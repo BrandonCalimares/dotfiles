@@ -4,7 +4,7 @@ import "../themes"
 
 Row {
     id: workspaceRow
-    spacing: 5
+    spacing: Theme.barSpacing
 
     Repeater {
         model: 9
@@ -12,13 +12,13 @@ Row {
         Rectangle {
             property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
             property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-            width: isActive ? 32 : (ws ? Theme.barHeight - 5 : 0)
-            height: Theme.barHeight - 6
-            radius: 8
+            implicitWidth: isActive ? Theme.barWidth : (ws ? Theme.barHeight - 5 : 0)
+            implicitHeight: Theme.barHeight - Theme.barPadding
+            radius: Theme.innerRadius
 
-            Behavior on width {
+            Behavior on implicitWidth {
                 NumberAnimation {
-                    duration: 200
+                    duration: Theme.widthDuration
                     easing.type: Easing.InOutQuad
                 }
             }
