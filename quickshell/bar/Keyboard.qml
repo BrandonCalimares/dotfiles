@@ -35,13 +35,13 @@ Item {
 
             stdout: SplitParser {
                 onRead: data => {
-                    const obj = JSON.parse(data)
-                    const newLayouts = obj.layouts.split(",").map(s => s.trim())
+                    const obj = JSON.parse(data);
+                    const newLayouts = obj.layouts.split(",").map(s => s.trim());
                     if (newLayouts.join(",") !== kbLayout.layouts.join(",")) {
-                        kbLayout.layouts = newLayouts
+                        kbLayout.layouts = newLayouts;
                     }
-                    kbLayout.active = obj.index
-                    kbLayout.layout = kbLayout.layouts[obj.index].slice(0, 2) ?? "??"
+                    kbLayout.active = obj.index;
+                    kbLayout.layout = kbLayout.layouts[obj.index].slice(0, 2) ?? "??";
                 }
             }
         }
@@ -51,6 +51,9 @@ Item {
             function onRawEvent(event) {
                 if (event.name === "activelayout") {
                     kbLayout.running = true;
+                    if (!popup.expanded && Hyprland.focusedMonitor.name == root.screen.name) {
+                        osdLoader.active = true;
+                    }
                 }
             }
         }
@@ -83,5 +86,26 @@ Item {
         id: popup
         layouts: kbLayout.layouts
         active: kbLayout.active
+    }
+
+    Loader {
+        id: osdLoader
+        active: false
+        focus: true
+        sourceComponent: KeyboardOSD {
+            screen: root.screen
+            layouts: kbLayout.layouts
+            active: kbLayout.active
+        }
+        onLoaded: osdLoader.item.expanded = true
+    }
+
+    Connections {
+        target: osdLoader.item
+        function onOpenedChanged() {
+            if (osdLoader.item && !osdLoader.item.opened) {
+                osdLoader.active = false;
+            }
+        }
     }
 }
