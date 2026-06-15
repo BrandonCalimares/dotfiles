@@ -61,6 +61,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
   hl.exec_cmd("wl-paste --type image --watch cliphist store")
+  hl.exec_cmd("cliphist wipe")
   hl.exec_cmd("gnome-keyring-daemon --start --components=secrets,pkcs11,ssh")
   hl.exec_cmd("dbus-update-activation-environment --systemd GNOME_KEYRING_CONTROL SSH_AUTH_SOCK")
 end)
@@ -290,13 +291,13 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region --clipboa
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprpicker --autocopy --notify"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({mode = "maximized", action = "toggle"}))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("notion-app"))
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu -display-columns 2 -theme ~/.config/rofi/theme.rasi | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Quickshell
 hl.bind(mainMod .. " + M", hl.dsp.global("quickshell:powermenu"))
 hl.bind(mainMod .. " + R", hl.dsp.global("quickshell:launcher"))
 hl.bind(mainMod .. " + Z", hl.dsp.global("quickshell:musicmenu"))
+hl.bind(mainMod .. " + V", hl.dsp.global("quickshell:clipboard"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))

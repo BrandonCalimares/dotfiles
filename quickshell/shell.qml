@@ -1,21 +1,23 @@
-import Quickshell
-
 import QtQuick
 import QtQuick.Layouts
-import "themes"
+import Quickshell
 import "bar"
 import "popups/volume"
+import "themes"
 
 ShellRoot {
     Notifications {}
-    /* VolumeOSD {} */
+
+    Clipboard {}
 
     Variants {
         model: Quickshell.screens
 
         PanelWindow {
             id: root
+
             property var modelData
+
             screen: modelData
             anchors.top: true
             anchors.left: true
@@ -24,11 +26,11 @@ ShellRoot {
             margins.left: Theme.outerMargin
             margins.right: Theme.outerMargin
             color: "transparent"
-
             implicitHeight: Theme.barHeight + Theme.barPadding * 2
 
             Rectangle {
                 id: bar
+
                 color: Theme.background
                 radius: Theme.outerRadius
                 anchors.fill: parent
@@ -43,6 +45,7 @@ ShellRoot {
                     Apps {
                         screen: root.modelData
                     }
+
                     Workspaces {
                         Layout.leftMargin: 4
                     }
@@ -55,23 +58,32 @@ ShellRoot {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: Theme.barSpacing
                 }
+
                 Clock {
                     id: clock
+
                     anchors.centerIn: parent
                 }
 
                 // Right side of the bar
                 RowLayout {
                     id: rightBar
+
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: Theme.barPadding
                     spacing: Theme.barSpacing
 
                     Tray {}
+
                     Keyboard {}
+
                     Internet {}
-                    Volume { screen: root.modelData }
+
+                    Volume {
+                        screen: root.modelData
+                    }
+
                     Power {
                         screen: root.modelData
                     }

@@ -106,19 +106,18 @@ PanelWindow {
                     Keys.onReturnPressed: {
                         container.filteredApps[popup.selectedIndex].execute();
                         popup.expanded = false;
-                        event.accepted = true
+                        event.accepted = true;
                     }
 
                     Keys.onUpPressed: {
-                        popup.selectedIndex = Math.max(0, popup.selectedIndex - 1)
-                        event.accepted = true
+                        popup.selectedIndex = Math.max(0, popup.selectedIndex - 1);
+                        event.accepted = true;
                     }
 
                     Keys.onDownPressed: {
-                        popup.selectedIndex = Math.min(container.filteredApps.length - 1, popup.selectedIndex + 1)
-                        event.accepted = true
+                        popup.selectedIndex = Math.min(container.filteredApps.length - 1, popup.selectedIndex + 1);
+                        event.accepted = true;
                     }
-
                 }
 
                 Text {
