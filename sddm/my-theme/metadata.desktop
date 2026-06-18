@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name=my-theme
+Description=my SDDM theme
+Author=Brandon Calimares
+Version=1.0
+Type=sddm-theme
+
+MainScript=Main.qml
+
+ConfigFile=theme.conf

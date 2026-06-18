@@ -13,6 +13,7 @@ My personal configuration for CachyOS with Hyprland.
 | 📊 Panel/UI Bars      | [Quickshell](https://github.com/quickshell-qi/quickshell) |
 | ℹ️ System Information | [Fastfetch](https://github.com/fastfetch-cli/fastfetch)   |
 | 🖼️ Wallpaper Manager  | [Hyprpaper](https://github.com/hyprwm/hyprpaper)          |
+| 🔐 Login Manager      | [SDDM](https://github.com/sddm/sddm)                      |
 
 ## ⌨️ Key Binds
 
