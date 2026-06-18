@@ -48,11 +48,13 @@ PanelWindow {
         stdout: SplitParser {
             onRead: data => {
                 const tab = data.indexOf("\t");
+                const clipId = data.slice(0, tab);
                 const entry = data.slice(tab + 1);
                 const isImage = entry.includes("[[ binary data");
                 clipModel.append({
                     fullLine: data,
                     entry: entry,
+                    clipId: clipId,
                     isImage: isImage,
                     imagePath: ""
                 });
@@ -243,6 +245,7 @@ PanelWindow {
                     required property bool isImage
                     required property string imagePath
                     required property int index
+                    required property string clipId
 
                     width: listView.width
                     implicitHeight: isImage ? 80 : textItem.implicitHeight + Theme.barPadding * 2
@@ -260,12 +263,12 @@ PanelWindow {
 
                     Process {
                         id: decodeProcess
-                        command: ["sh", "-c", `cliphist decode <<< '${fullLine}' > /tmp/clip_${index}.png`]
+                        command: ["sh", "-c", `cliphist decode <<< '${fullLine}' > /tmp/clip_${clipId}.png`]
                         running: isImage && imagePath === ""
 
                         onRunningChanged: {
                             if (!running && isImage) {
-                                clipModel.setProperty(index, "imagePath", `/tmp/clip_${index}.png`);
+                                clipModel.setProperty(index, "imagePath", `/tmp/clip_${clipId}.png`);
                             }
                         }
                     }

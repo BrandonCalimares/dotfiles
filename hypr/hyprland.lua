@@ -285,9 +285,9 @@ hl.bind(mainMod .. " + W", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("spotify"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("brave"))
-hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind("PRINT", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | satty --filename -"))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("code"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy && notify-send \"Screenshot saved\" \"Image copied to the clipboard\" -a \"Hyprland\""))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprpicker --autocopy --notify"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({mode = "maximized", action = "toggle"}))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("notion-app"))
@@ -418,6 +418,12 @@ hl.window_rule({
     name  = "vscode-blur",
     match = { class = "code"},
     opacity = 0.9,
+})
+
+hl.window_rule({
+    name = "satty-float",
+    match = { class = "com.gabm.satty" },
+    float = true,
 })
 
 hl.layer_rule({
